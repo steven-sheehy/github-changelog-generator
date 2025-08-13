@@ -45,6 +45,7 @@ public class CommandProcessor implements ApplicationRunner {
 	}
 
 	private void run(List<String> args) throws IOException {
+		System.out.println("Args: " + args);
 		String milestone = args.get(0);
 		String path = args.get(1);
 		run(milestone, path);

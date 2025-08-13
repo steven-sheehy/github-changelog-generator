@@ -87,6 +87,14 @@ public class ApplicationProperties {
 		this.addSections = addSections;
 	}
 
+	@Override
+	public String toString() {
+		return "ApplicationProperties{" + "repository=" + this.repository + ", milestoneReference="
+				+ this.milestoneReference + ", sections=" + this.sections + ", issues=" + this.issues
+				+ ", contributors=" + this.contributors + ", externalLinks=" + this.externalLinks + ", addSections="
+				+ this.addSections + '}';
+	}
+
 	public Repository getRepository() {
 		return this.repository;
 	}
@@ -173,6 +181,12 @@ public class ApplicationProperties {
 
 		public IssueType getType() {
 			return this.type;
+		}
+
+		@Override
+		public String toString() {
+			return "Section{" + "title='" + this.title + '\'' + ", group='" + this.group + '\'' + ", sort=" + this.sort
+					+ ", labels=" + this.labels + ", type=" + this.type + '}';
 		}
 
 	}

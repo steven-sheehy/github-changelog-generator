@@ -30,6 +30,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 
@@ -52,6 +54,8 @@ import io.spring.githubchangeloggenerator.github.service.Repository;
  */
 @Component
 public class ChangelogGenerator {
+
+	private static final Logger logger = LoggerFactory.getLogger(ChangelogGenerator.class);
 
 	private static final Comparator<Issue> TITLE_COMPARATOR = Comparator.comparing(Issue::getTitle,
 			String.CASE_INSENSITIVE_ORDER);
@@ -92,6 +96,7 @@ public class ChangelogGenerator {
 		this.portedIssues = properties.getIssues().getPorts();
 		this.externalLinks = properties.getExternalLinks();
 		this.generateLinks = properties.getIssues().isGenerateLinks();
+		logger.info("properties: " + properties);
 	}
 
 	/**
