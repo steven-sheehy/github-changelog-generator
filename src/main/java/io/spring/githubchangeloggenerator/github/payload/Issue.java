@@ -85,7 +85,11 @@ public class Issue {
 
 	@Override
 	public String toString() {
-		return this.title;
+		return "Issue{" +
+				"number='" + number + '\'' +
+				", title='" + title + '\'' +
+				", issue=" + url.contains("issue") +
+				", labels=" + labels +
+				'}';
 	}
-
 }

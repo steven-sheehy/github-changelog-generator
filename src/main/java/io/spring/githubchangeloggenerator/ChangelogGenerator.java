@@ -110,7 +110,9 @@ public class ChangelogGenerator {
 		int milestoneNumber = resolveMilestoneReference(milestone);
 		logger.info("Milestone number: {}", milestoneNumber);
 		List<Issue> issues = getIssues(milestoneNumber);
-		logger.info("Issues: {}", issues);
+		issues.forEach(issue -> {
+			logger.info("{}", issue);
+		});
 		String content = generateContent(issues);
 		logger.info("Content: {}", content);
 		writeContentToFile(content, path);
