@@ -108,8 +108,11 @@ public class ChangelogGenerator {
 	 */
 	public void generate(String milestone, String path) throws IOException {
 		int milestoneNumber = resolveMilestoneReference(milestone);
+		logger.info("Milestone number: {}", milestoneNumber);
 		List<Issue> issues = getIssues(milestoneNumber);
+		logger.info("Issues: {}", issues);
 		String content = generateContent(issues);
+		logger.info("Content: {}", content);
 		writeContentToFile(content, path);
 	}
 
@@ -138,6 +141,7 @@ public class ChangelogGenerator {
 		StringBuilder content = new StringBuilder();
 		addSectionContent(content, this.sections.collate(issues));
 		Set<User> contributors = getContributors(issues);
+		logger.info("Contributors: {}", contributors);
 		if (!contributors.isEmpty()) {
 			addContributorsContent(content, contributors);
 		}

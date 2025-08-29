@@ -28,6 +28,8 @@ import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 import io.spring.githubchangeloggenerator.github.payload.Issue;
@@ -41,6 +43,7 @@ import io.spring.githubchangeloggenerator.github.payload.Issue;
  */
 class ChangelogSections {
 
+	private static final Logger logger = LoggerFactory.getLogger(ChangelogSections.class);
 	private static final List<ChangelogSection> DEFAULT_SECTIONS;
 	static {
 		List<ChangelogSection> sections = new ArrayList<>();
@@ -90,6 +93,7 @@ class ChangelogSections {
 				collated.get(section).add(issue);
 			}
 		}
+		logger.info("Collated issues: {}", collated);
 		return collated;
 	}
 
@@ -101,6 +105,7 @@ class ChangelogSections {
 				result.add(section);
 			}
 		}
+		logger.info("Found {} sections for issue {}: {}", result.size(), issue, result);
 		return result;
 	}
 

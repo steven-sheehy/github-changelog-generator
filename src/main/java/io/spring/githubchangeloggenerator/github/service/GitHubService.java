@@ -16,6 +16,7 @@
 
 package io.spring.githubchangeloggenerator.github.service;
 
+import io.spring.githubchangeloggenerator.ChangelogGenerator;
 import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +48,7 @@ import io.spring.githubchangeloggenerator.github.payload.Milestone;
 @Component
 public class GitHubService {
 
+	private static final Logger logger = LoggerFactory.getLogger(GitHubService.class);
 	private static final Pattern LINK_PATTERN = Pattern.compile("<(.+)>; rel=\"(.+)\"");
 
 	private static final String MILESTONES_URI = "/repos/{owner}/{name}/milestones?state=all&sort=due_on&direction=desc&per_page=50";
@@ -104,6 +108,7 @@ public class GitHubService {
 		if (!StringUtils.hasText(url)) {
 			return null;
 		}
+		logger.info("Invoking {} with {}", url, Arrays.toString(uriVariables));
 		return pageFrom(this.restTemplate.getForEntity(url, arrayType(type), uriVariables), type);
 	}
 
